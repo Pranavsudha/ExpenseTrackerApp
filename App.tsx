@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import AllExpenses from './app/src/screens/AllExpenses';
 import RecentExpenses from './app/src/screens/RecentExpenses';
 import ManageExpenses from './app/src/screens/ManageExpenses';
@@ -12,6 +13,8 @@ import { GlobalStyles } from './constants/styles';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
+const TopTabs = createMaterialTopTabNavigator();
+
 
 function ExpensesOverview() {
   return ( 
@@ -75,7 +78,6 @@ export default function App() {
             component={ManageExpenses}
 
           />
-         
         </Stack.Navigator>
       </NavigationContainer>
     </>
