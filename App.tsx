@@ -72,7 +72,8 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator 
         screenOptions={{
-          contentStyle: { backgroundColor:GlobalStyles.colors.primary500 },
+         headerStyle: { backgroundColor:GlobalStyles.colors.primary500 },
+         headerTintColor:'white'
         }}
         >
         <Stack.Screen
@@ -83,6 +84,9 @@ export default function App() {
           <Stack.Screen
             name="ManageExpenses" // Fix the typo here
             component={ManageExpenses}
+            options={{
+              presentation:'modal' // opens up a modal when click button is clicked
+            }}
 
           />
              <Stack.Screen
