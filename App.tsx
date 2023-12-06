@@ -6,10 +6,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import AllExpenses from './app/src/screens/AllExpenses';
-import RecentExpenses from './app/src/screens/RecentExpenses';
-import ManageExpenses from './app/src/screens/ManageExpenses';
 import { Ionicons } from "@expo/vector-icons";
 import { GlobalStyles } from './constants/styles';
+import Iconbutton from './app/src/ui/Iconbutton';
+import RecentExpenses from './app/src/screens/RecentExpenses';
+import ManageExpenses from './app/src/screens/ManageExpenses';
+
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -19,22 +21,27 @@ const TopTabs = createMaterialTopTabNavigator();
 function ExpensesOverview() {
   return ( 
     <BottomTabs.Navigator
-    screenOptions={{
-      headerStyle:{
-        backgroundColor:GlobalStyles.colors.primary500,
+    screenOptions={({navigation}) => ({
+      headerStyle: {
+        backgroundColor: GlobalStyles.colors.primary500,
       },
-      headerTintColor:'white',
-      tabBarActiveTintColor:GlobalStyles.colors.accent500,
-      tabBarStyle:{
-        backgroundColor:GlobalStyles.colors.primary500
-      }
-    }}
-    >
+      headerTintColor: 'white',
+      tabBarActiveTintColor: GlobalStyles.colors.accent500,
+      tabBarStyle: {
+        backgroundColor: GlobalStyles.colors.primary500,
+      },
+      headerRight: ({ tintColor }) => (
+        <Iconbutton icon="add" size={24} color={tintColor} onPress={() => {
+          navigation.navigate('ManageExpenses')
+        }} />
+      ),
+    })}
+  >
       <BottomTabs.Screen
         name="RecentExpenses"
         component={RecentExpenses}
         options={{
-          tabBarLabel: "User",
+          tabBarLabel: "Recent Expenses",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="hourglass" size={size} color={color} />
           ),
@@ -48,7 +55,7 @@ function ExpensesOverview() {
         name="AllExpenses"
         component={AllExpenses}
         options={{
-          tabBarLabel: "User",
+          tabBarLabel: "All Expenses",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="calendar" size={size} color={color} />
           ),
@@ -76,6 +83,11 @@ export default function App() {
           <Stack.Screen
             name="ManageExpenses" // Fix the typo here
             component={ManageExpenses}
+
+          />
+             <Stack.Screen
+            name="RecentExpenses" // Fix the typo here
+            component={RecentExpenses}
 
           />
         </Stack.Navigator>

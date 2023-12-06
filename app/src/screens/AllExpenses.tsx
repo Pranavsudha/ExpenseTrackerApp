@@ -4,7 +4,7 @@ import ExpensesOutput from '../components/ExpensesOutput'
 
 function AllExpenses(){
   return (
-    <ExpensesOutput expenses={undefined} expensesPeriod='Total'/>
+    <ExpensesOutput expensesPeriod='Total'/>
   )
 }
 
