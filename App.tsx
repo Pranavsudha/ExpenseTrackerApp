@@ -11,6 +11,7 @@ import { GlobalStyles } from './constants/styles';
 import Iconbutton from './app/src/ui/Iconbutton';
 import RecentExpenses from './app/src/screens/RecentExpenses';
 import ManageExpenses from './app/src/screens/ManageExpenses';
+import ExpensesContextProvider from './app/store/expenses-context';
 
 
 const Stack = createNativeStackNavigator();
@@ -69,6 +70,7 @@ export default function App() {
   return (
     <>
       <StatusBar style='auto'/>
+      <ExpensesContextProvider>
       <NavigationContainer>
         <Stack.Navigator 
         screenOptions={{
@@ -96,6 +98,8 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      </ExpensesContextProvider>
+      
     </>
   );
 }

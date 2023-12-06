@@ -3,13 +3,13 @@ import React from 'react'
 import { GlobalStyles } from '../../../constants/styles';
 
 function ExpensesSummary({expenses,periodName}){
-    const expenseSum = expenses.reduce((sum,expense)=>{
+    const expenseSum = expenses?.reduce((sum,expense)=>{
         return sum + expense.amount
     },0); //jS method that allows to combine multiple values from array
   return (
     <View style={styles.container}>
      <Text style={styles.period}>{periodName}</Text>
-     <Text style={styles.sum}>${expenseSum.toFixed(2)}</Text>
+     <Text style={styles.sum}>${expenseSum?.toFixed(2)}</Text>
     </View>
   )
 }

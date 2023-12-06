@@ -13,6 +13,7 @@ function ExpensesItem({ id,description, amount, date }) {
     navigation.navigate('ManageExpenses',{
       expenseID:id})
   }
+  
   return (
     <Pressable onPress={expensePressHandler}>
       <View style={styles.expenseItem}>
