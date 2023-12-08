@@ -36,35 +36,33 @@ function ExpenseForm({ onCancel, onSubmit, submitButtonLabel, defaultValues }) {
   function submitHandler() {
     const expenseData = {
       amount: +inputs.amount.value,
-      date: new Date(inputs?.date.value),
+      date: new Date(inputs.date.value),
       description: inputs.description.value,
     };
-
+  
     const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
-    const dateIsValid = expenseData.date.toString() === "Invalid Date";
+    const dateIsValid = !isNaN(expenseData.date.getTime());
     const descriptionIsValid = expenseData.description.trim().length > 0;
-
+  
     if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
-    //   Alert.alert("Invalid Input", "Please Check Your Input Values");
-    setInputs((curInputs)=>{
-        return {
-            amount: {value:curInputs.amount.value, isValid:amountIsValid},
-            date: {value:curInputs.date.value, isValid:dateIsValid},
-           description: {
-            value:curInputs.description.value, 
-            isValid:descriptionIsValid
-        }
-        }
-    })
+      setInputs((curInputs) => ({
+        amount: { value: curInputs.amount.value, isValid: amountIsValid },
+        date: { value: curInputs.date.value, isValid: dateIsValid },
+        description: {
+          value: curInputs.description.value,
+          isValid: descriptionIsValid,
+        },
+      }));
       return;
     }
-
+  
     onSubmit(expenseData);
   }
+  
 
-  const formIsInvalid = !inputs.amount.isValid || 
-  !inputs.date.isValid || 
-  !inputs.description.isValid
+//   const formIsInvalid = !inputs.amount.isValid || 
+//   !inputs.date.isValid || 
+//   !inputs.description.isValid
 
 
 
@@ -75,7 +73,7 @@ function ExpenseForm({ onCancel, onSubmit, submitButtonLabel, defaultValues }) {
         <Input
           style={styles.rowInput}
           label={"Amount"}
-          invalid={!inputs?.amount?.isValid}
+          invalid={!inputs.amount.isValid}
           textInputConfig={{
             keyboardType: "decimal-pad",
             onChangeText: inputChangeHandler.bind(this, "amount"),
@@ -108,7 +106,7 @@ function ExpenseForm({ onCancel, onSubmit, submitButtonLabel, defaultValues }) {
           // autoCorrect:false // default is true
         }}
       />
-      {formIsInvalid && (<Text style={styles.errorText}>Invalid Input Values - please check your entered data!</Text>)}
+      {/* {formIsInvalid && (<Text style={styles.errorText}>Invalid Input Values - please check your entered data!</Text>)} */}
       <View style={styles.buttons}>
         <Button style={styles.button} mode="flat" onPress={onCancel}>
           Cancel

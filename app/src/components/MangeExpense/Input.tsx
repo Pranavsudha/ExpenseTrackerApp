@@ -7,17 +7,17 @@ function Input({label,style,textInputConfig,invalid}){
    const inputStyles=[styles.input];
 
     // Check if both are truthy
-  if (textInputConfig && textInputConfig.multiline) {
-    inputStyles.push(styles.inputMultiLine);
-  }
+//   if (textInputConfig && textInputConfig.multiline) {
+//     inputStyles.push(styles.inputMultiLine);
+//   }
 
-  if (invalid) {
-    inputStyles.push(styles.invalidInput);
-  }
+//   if (invalid) {
+//     inputStyles.push(styles.invalidInput);
+//   }
 
   return (
     <View style={[styles.inputContainer, style]}>
-    <Text style={[styles.label, invalid && styles.invalidLabel]}>{label}</Text>
+    <Text style={[styles.label]}>{label}</Text>
     <TextInput
       style={inputStyles}
       {...textInputConfig}

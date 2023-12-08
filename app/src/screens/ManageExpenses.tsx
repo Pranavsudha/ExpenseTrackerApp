@@ -29,21 +29,21 @@ function ManageExpenses({ route }) {
   }
 
   function confirmHandler(expenseData) {
-    if (!isEditing) {
-      expensesContext.updateExpense(editedExpenseID,expenseData)
+    if (isEditing) {
+      expensesContext.updateExpense(editedExpenseID, expenseData);
     } else {
+      // When adding a new expense, there's no need for editedExpenseID
       expensesContext.addExpense(expenseData);
     }
     navigation.goBack();
   }
 
-  const selectedExpense = expensesContext.expenses.find(
-    expenses => expenses?.id === editedExpenseID);
+  const selectedExpense = isEditing
+    ? expensesContext.expenses.find((expense) => expense?.id === editedExpenseID)
+    : null;
+
 
   
-
-
-
   return (
     <View style={styles.container}>
       <ExpenseForm 
