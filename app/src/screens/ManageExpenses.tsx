@@ -28,26 +28,30 @@ function ManageExpenses({ route }) {
     navigation.goBack();
   }
 
-  function confirmHandler() {
+  function confirmHandler(expenseData) {
     if (!isEditing) {
-      expensesContext.addExpense({
-        description: "Test",
-        amount: 19.99,
-        date: new Date('2022-05-20'),
-      });
+      expensesContext.updateExpense(editedExpenseID,expenseData)
     } else {
-      expensesContext.updateExpense(editedExpenseID, {
-        description: "Test",
-        amount: 19.99,
-        date: new Date('2022-05-20'),
-      });
+      expensesContext.addExpense(expenseData);
     }
     navigation.goBack();
   }
 
+  const selectedExpense = expensesContext.expenses.find(
+    expenses => expenses?.id === editedExpenseID);
+
+  
+
+
+
   return (
     <View style={styles.container}>
-      <ExpenseForm submitButtonLabel={isEditing ? 'Update' : 'Add'} onCancel={cancelHandler}/>
+      <ExpenseForm 
+      submitButtonLabel={isEditing ? 'Update' : 'Add'}
+      onSubmit={confirmHandler}
+       onCancel={cancelHandler}
+       defaultValues={selectedExpense}
+       />
      
       {isEditing && (
         <View style={styles.deleteContainer}>
