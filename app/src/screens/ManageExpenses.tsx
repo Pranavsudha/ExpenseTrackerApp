@@ -6,6 +6,7 @@ import Button from '../ui/Button';
 import { ExpensesContext } from '../../store/expenses-context';
 import IconButton from '../ui/Iconbutton';
 import ExpenseForm from '../components/MangeExpense/ExpenseForm';
+import { storeExpenese } from '../ui/https';
 
 function ManageExpenses({ route }) {
   const expensesContext = useContext(ExpensesContext);
@@ -20,6 +21,7 @@ function ManageExpenses({ route }) {
   }, [navigation, isEditing]);
 
   function deleteExpenseHandler() {
+  
     expensesContext.deleteExpense(editedExpenseID);
     navigation.goBack();
   }
@@ -32,6 +34,7 @@ function ManageExpenses({ route }) {
     if (isEditing) {
       expensesContext.updateExpense(editedExpenseID, expenseData);
     } else {
+      storeExpenese(expenseData); //forward data
       // When adding a new expense, there's no need for editedExpenseID
       expensesContext.addExpense(expenseData);
     }
